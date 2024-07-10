@@ -1,5 +1,5 @@
 import type { PriceCalculationRequest } from "../types/types";
-import { validateInputs } from "../utils/utils";
+import { isWorkingDay, validateInputs } from "../utils/utils";
 
 describe("validateInputs", () => {
   it("should return false for customerId with length 1 lowercase", () => {
@@ -41,4 +41,33 @@ describe("validateInputs", () => {
 
     expect(validateInputs(request)).toBe(false);
   });
+});
+
+describe("isWorkingDay function", () => {
+  it("should return true for Monday", () => {
+    const monday = "2023-07-10"; // A Monday
+    expect(isWorkingDay(monday)).toBe(true);
+  });
+
+  it("should return true for Friday", () => {
+    const friday = "2023-07-14"; // A Friday
+    expect(isWorkingDay(friday)).toBe(true);
+  });
+
+  it("should return false for Sunday", () => {
+    const sunday = "2023-07-09"; // A Sunday
+    expect(isWorkingDay(sunday)).toBe(false);
+  });
+
+  it("should return false for Saturday", () => {
+    const saturday = "2023-07-15"; // A Saturday
+    expect(isWorkingDay(saturday)).toBe(false);
+  });
+
+  //   it("should return false for invalid date format", () => {
+  //     const invalidDate = "2023-07-XX"; // Invalid date format
+  //     expect(isWorkingDay(invalidDate)).toBe(false);
+  //   });
+
+  // Add more test cases as needed
 });
